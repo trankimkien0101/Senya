@@ -6,13 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.project.projectseason4.data.Attraction
 
 import com.project.projectseason4.databinding.FragmentAttractionDetailBinding
+import com.squareup.picasso.Picasso
 
-class AttractionDetailFragment: Fragment() {
+class AttractionDetailFragment: BaseFragment() {
     private var _binding : FragmentAttractionDetailBinding? = null
     private val binding get() = _binding!!
     private val safeArgs : AttractionDetailFragmentArgs by navArgs()
+    private val attraction : Attraction by lazy {
+        attractions.find { it.id == safeArgs.attractionId }!!
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,8 +29,14 @@ class AttractionDetailFragment: Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button.text = safeArgs.attractionId
+        binding.titleTextView.text = attraction.title
+        binding.descriptionTextView.text = attraction.description
+        Picasso.get().load(attraction.image_urls).into(binding.headerImageView)
+        binding.monthsToVisitTextView.text= attraction.months_to_visit
+        binding.numberOfFactsTextView.text ="${attraction.facts.size} facts"
+        binding.numberOfFactsTextView.setOnClickListener {
 
+        }
     }
 
     override fun onDestroyView() {
