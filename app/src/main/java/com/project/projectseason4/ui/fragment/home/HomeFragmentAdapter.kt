@@ -9,7 +9,7 @@ import com.project.projectseason4.databinding.ViewHolderAttractionBinding
 import com.squareup.picasso.Picasso
 
 class HomeFragmentAdapter(
-    private val onClickedCallback:() -> Unit
+    private val onClickedCallback:(String) -> Unit
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val attraction = ArrayList<Attraction>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -33,12 +33,12 @@ class HomeFragmentAdapter(
         LayoutInflater.from(parent.context).inflate(R.layout.view_holder_attraction,parent,false)
     ){
         private val binding = ViewHolderAttractionBinding.bind(itemView)
-        fun onBind(attraction: Attraction, onClicked:()->Unit){
+        fun onBind(attraction: Attraction, onClicked:(String)->Unit){
             binding.titleTextView.text = attraction.title
             Picasso.get().load(attraction.image_urls).into(binding.headerImageView)
             binding.monthsToVisitTextView.text= attraction.months_to_visit
             binding.root.setOnClickListener {
-                onClicked()
+                onClicked(attraction.id)
             }
 
         }
