@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.project.projectseason4.ui.fragment.HomeFragment"
+        android:name="com.project.projectseason4.ui.fragment.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"
         >
